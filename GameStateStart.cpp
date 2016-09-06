@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <SFML/Graphics.hpp>
 
 #include "GameStateStart.h"
@@ -51,10 +52,27 @@ void GameStateStart::HandleInput()
 			case sf::Event::KeyPressed:
 			{
 				if (event.key.code == sf::Keyboard::Escape) { this->game->window.close(); }
+				else if (event.key.code == sf::Keyboard::Space) { this->LoadGame(); }
 				break;
 			}
 			default: break;
 		}
 	}
+	return;
+}
+
+GameStateStart::GameStateStart(Game* game)
+{
+	this->game = game;
+	sf::Vector2f pos = sf::Vector2f(this->game->window.getSize());
+	this->view.setSize(pos);
+	pos *= 0.5f;
+	this->view.setCenter(pos);
+}
+
+void GameStateStart::LoadGame()
+{
+	this->game->PushState(new GameStateEditor(this->game));
+
 	return;
 }

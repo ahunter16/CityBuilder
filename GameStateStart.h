@@ -10,6 +10,7 @@ class GameStateStart : public GameState
 {
 private:
 	sf::View view;
+	void LoadGame();
 
 public:
 	virtual void Draw(const float dt);
@@ -17,6 +18,6 @@ public:
 	virtual void HandleInput();
 
 	GameStateStart(Game* game);
-}
+};
 
 #endif

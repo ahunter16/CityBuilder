@@ -7,6 +7,12 @@
 
 #include "Game.h"
 #include "GameState.h"
+#include "TextureManager.h"
+
+void Game::LoadTextures()
+{
+	textureManager.LoadTexture("background", "media/background.png");
+}
 
 void Game::PushState(GameState* state)
 {
@@ -59,8 +65,12 @@ void Game::GameLoop()
 
 Game::Game()
 {
+	this->LoadTextures();
+
 	this->window.create(sf::VideoMode(800, 600), "City Builder");
 	this->window.setFramerateLimit(60);
+
+	this->background.setTexture(this->textureManager.getRef("background"));
 }
 
 Game::~Game()
